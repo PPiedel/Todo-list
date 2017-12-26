@@ -1,11 +1,16 @@
 package pl.yahoo.pawelpiedel.todolist.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by Pawel_Piedel on 25.12.2017.
  */
 
 public class TodoList {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 

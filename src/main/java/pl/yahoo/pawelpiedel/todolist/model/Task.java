@@ -1,15 +1,22 @@
 package pl.yahoo.pawelpiedel.todolist.model;
 
+import javax.persistence.*;
+
 /**
  * Created by Pawel_Piedel on 25.12.2017.
  */
 
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String label;
     private String description;
-
+    @ManyToOne
+    @JoinColumn(name = "User")
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "TodoList")
     private TodoList todoList;
 
     protected Task() {
