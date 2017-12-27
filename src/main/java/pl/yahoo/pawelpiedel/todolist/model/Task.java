@@ -5,7 +5,8 @@ import javax.persistence.*;
 /**
  * Created by Pawel_Piedel on 25.12.2017.
  */
-
+@Entity
+@Table(name = "Tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

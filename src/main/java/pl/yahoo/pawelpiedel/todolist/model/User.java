@@ -1,12 +1,12 @@
 package pl.yahoo.pawelpiedel.todolist.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Pawel_Piedel on 25.12.2017.
  */
+@Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

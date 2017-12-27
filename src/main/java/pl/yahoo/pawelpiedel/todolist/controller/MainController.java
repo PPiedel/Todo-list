@@ -1,6 +1,7 @@
 package pl.yahoo.pawelpiedel.todolist.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.yahoo.pawelpiedel.todolist.model.User;
 
@@ -9,7 +10,7 @@ import pl.yahoo.pawelpiedel.todolist.model.User;
  */
 @RestController
 public class MainController {
-    @RequestMapping("/user")
+    @RequestMapping(name = "/,home,index", method = RequestMethod.GET)
     public User greeting() {
         return new User("test", "test");
     }
