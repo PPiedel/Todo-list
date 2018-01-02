@@ -1,17 +1,21 @@
 package pl.yahoo.pawelpiedel.todolist.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pl.yahoo.pawelpiedel.todolist.model.User;
 
 /**
  * Created by Pawel_Piedel on 26.12.2017.
  */
-@RestController
+@Controller
 public class MainController {
-    @RequestMapping(name = "/,home,index", method = RequestMethod.GET)
-    public User greeting() {
-        return new User("test", "test");
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String greeting() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }
