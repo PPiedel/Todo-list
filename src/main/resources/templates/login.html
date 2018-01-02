@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb" lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Todo List</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script th:src="@{/js/login.js}"></script>
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="@{/css/login.css}"/>
+
 </head>
 <body>
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Logo</a>
+            <a th:href="@{/}" class="navbar-brand">Logo</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -30,6 +30,7 @@
         </div>
     </div>
 </nav>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -43,30 +44,30 @@
                             <a href="#" id="register-form-link">Register</a>
                         </div>
                     </div>
-                    <hr/>
+                    <hr>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form"
+                            <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form"
                                   style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                           placeholder="Username" value=""/>
+                                           placeholder="Username" value="">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
-                                           class="form-control" placeholder="Password"/>
+                                           class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group text-center">
-                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember"/>
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                     <label for="remember"> Remember Me</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="form-control btn btn-login" value="Log In"/>
+                                                   class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
                                 </div>
@@ -74,37 +75,36 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="text-center">
-                                                <a href="https://phpoll.com/recover" tabindex="5"
+                                                <a href="http://phpoll.com/recover" tabindex="5"
                                                    class="forgot-password">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <form id="register-form" action="/register" method="post" role="form"
-                                  style="display: none;">
+                            <form id="register-form" action="#" method="post" role="form" style="display: none;">
                                 <div class="form-group">
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                           placeholder="Username" value=""/>
+                                    <input type="text" name="usernameR" id="usernameR" tabindex="1" class="form-control"
+                                           placeholder="Username" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                           placeholder="Email Address" value=""/>
+                                    <input type="email" name="emailR" id="emailR" tabindex="1" class="form-control"
+                                           placeholder="Email Address" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password" tabindex="2"
-                                           class="form-control" placeholder="Password"/>
+                                    <input type="password" name="passwordR" id="passwordR" tabindex="2"
+                                           class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                           class="form-control" placeholder="Confirm Password"/>
+                                    <input type="password" name="confirm-passwordR" id="confirm-passwordR" tabindex="2"
+                                           class="form-control" placeholder="Confirm Password">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="register-submit" id="register-submit"
                                                    tabindex="4" class="form-control btn btn-register"
-                                                   value="Register Now"/>
+                                                   value="Register Now">
                                         </div>
                                     </div>
                                 </div>
@@ -116,5 +116,10 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/login_script.js"></script>
 </body>
 </html>
