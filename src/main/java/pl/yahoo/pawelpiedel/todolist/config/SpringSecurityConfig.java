@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -17,19 +16,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/console").permitAll() // temporary
+                .antMatchers("/register").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .httpBasic()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/js/**");
+                .antMatchers("/resources/**");
     }
+
 }
