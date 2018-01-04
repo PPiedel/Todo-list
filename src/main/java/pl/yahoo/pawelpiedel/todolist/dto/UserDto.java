@@ -16,6 +16,14 @@ public class UserDto {
     @NotEmpty
     private String password;
 
+    public UserDto() {
+    }
+
+    public UserDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
