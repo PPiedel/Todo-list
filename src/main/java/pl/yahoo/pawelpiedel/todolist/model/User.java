@@ -10,14 +10,14 @@ import java.util.Objects;
  * Created by Pawel_Piedel on 25.12.2017.
  */
 @Entity
-@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
     @NotEmpty
     private String password;
 
@@ -34,13 +34,13 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public User(String username, String password, Collection<Role> roles) {
-        this.username = username;
+    public User(String email, String password, Collection<Role> roles) {
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
@@ -53,12 +53,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -83,7 +83,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username) &&
+                Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles);
     }
@@ -91,13 +91,13 @@ public class User {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, username, password, roles);
+        return Objects.hash(id, email, password, roles);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';

@@ -19,16 +19,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByEmail(String username) {
+        return userRepository.findByEmail(username);
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
-        User user = new User();
-        user.setUsername(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setRoles(Collections.singletonList(new Role("ROLE_USER")));
-        userRepository.save(user);
+    public User registerNewUser(UserDto userDto) throws EmailExistsException {
+        User user = null;
+        if (emailExist(userDto.getEmail())) {
+            throw new EmailExistsException(
+                    "There is an account with that email adress: "
+                            + userDto.getEmail());
+        } else {
+            user = new User();
+            user.setEmail(userDto.getEmail());
+            user.setPassword(userDto.getPassword());
+            user.setRoles(Collections.singletonList(new Role("ROLE_USER")));
+        }
+
+        return userRepository.save(user);
+    }
+
+    private boolean emailExist(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
     }
 }

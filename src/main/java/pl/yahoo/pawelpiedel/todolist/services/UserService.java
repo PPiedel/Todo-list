@@ -5,7 +5,7 @@ import pl.yahoo.pawelpiedel.todolist.model.User;
 
 public interface UserService {
 
-    User findByUsername(String username);
+    User findByEmail(String email);
 
-    void saveUser(UserDto user);
+    User registerNewUser(UserDto user) throws EmailExistsException;
 }

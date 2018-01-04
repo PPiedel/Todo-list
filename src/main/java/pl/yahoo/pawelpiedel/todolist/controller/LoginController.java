@@ -3,13 +3,10 @@ package pl.yahoo.pawelpiedel.todolist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.yahoo.pawelpiedel.todolist.dto.UserDto;
 import pl.yahoo.pawelpiedel.todolist.model.User;
+import pl.yahoo.pawelpiedel.todolist.services.EmailExistsException;
 import pl.yahoo.pawelpiedel.todolist.services.UserService;
 
 import javax.validation.Valid;
@@ -25,19 +22,44 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/registerSuccess", method = RequestMethod.GET)
+    public String registerSuccess(Model model) {
+        System.out.println("Jestem w register success");
+        model.addAttribute("registerSucess", true);
+        model.addAttribute("user", new UserDto());
+        return "login";
+    }
+
+    @RequestMapping(value = "/registerError", method = RequestMethod.GET)
+    public String registerError(Model model) {
+        model.addAttribute("registerError", true);
+        model.addAttribute("user", new UserDto());
+        return "login";
+    }
+
+
     @PostMapping(value = "/register")
-    public String register(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult, Errors errors) {
-        System.out.println(userDto.toString());
+    public String register(@ModelAttribute("user") @Valid UserDto userDto) {
+        User registered = createUserAccount(userDto);
 
-        User existing = userService.findByUsername(userDto.getEmail());
+        if (registered != null) {
+            System.out.println(registered.toString());
+            return "redirect:/registerSuccess";
 
-
-        if (existing == null) {
-            userService.saveUser(userDto);
+        } else {
+            return "redirect:/registerError/";
         }
+    }
 
-        return "index";
-
+    private User createUserAccount(UserDto userDto) {
+        User registered;
+        try {
+            registered = userService.registerNewUser(userDto);
+        } catch (EmailExistsException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return registered;
     }
 
 }

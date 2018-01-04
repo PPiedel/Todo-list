@@ -1,1 +1,1 @@
-INSERT INTO Users(id,username,password) VALUES (1,'test','test')
+INSERT INTO Users(id,email,password) VALUES (1,'test','test')
