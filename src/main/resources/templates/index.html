@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Todo List</title>
     <meta charset="utf-8"/>
@@ -9,33 +9,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a th:href="@{/}" class="navbar-brand">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <div sec:authorize="isAnonymous()">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Logowanie</a></li>
-                    <li><a th:href="@{/register}"><span class="glyphicon glyphicon-log-out"></span>Rejestracja</a></li>
-                </ul>
-            </div>
-            <div sec:authorize="isAuthenticated()">
-                <ul class="nav navbar-nav navbar-right">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
+<div th:replace="fragments/navbar :: navbar">...</div>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -97,10 +71,7 @@
 </div>
 <br/>
 
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
-</footer>
-
+<div th:replace="fragments/footer :: footer">...</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
