@@ -38,15 +38,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .failureUrl("/login/error")
                 .defaultSuccessUrl("/login/success")
+                .failureUrl("/login/error")
                 .loginProcessingUrl("/login/user")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .and().csrf().disable()
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/access-denied")
+                .and()
                 .logout()
-                .permitAll()
-                .and();
+                .permitAll();
     }
 
     @Override

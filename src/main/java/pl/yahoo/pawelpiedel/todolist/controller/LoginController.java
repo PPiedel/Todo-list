@@ -8,11 +8,11 @@ import pl.yahoo.pawelpiedel.todolist.dto.UserDto;
 @Controller
 public class LoginController {
 
-    @RequestMapping("/login")
+    /*@RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new UserDto());
         return "login";
-    }
+    }*/
 
     @RequestMapping("/login/error")
     public String loginError(Model model) {
@@ -28,4 +28,11 @@ public class LoginController {
 
         return "login";
     }
+
+
+    @RequestMapping("/access-denied")
+    public String accessDenied() throws Exception {
+        throw new Exception("Nie masz uprawnień aby wyświetlć tą stronę. Czy wpisany link jest poprawny?");
+    }
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Todo List</title>
     <meta charset="utf-8"/>
@@ -20,12 +20,19 @@
             <a th:href="@{/}" class="navbar-brand">Logo</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a th:href="@{/register}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-            </ul>
+            <div sec:authorize="isAnonymous()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Logowanie</a></li>
+                    <li><a th:href="@{/register}"><span class="glyphicon glyphicon-log-out"></span>Rejestracja</a></li>
+                </ul>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+                    </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
