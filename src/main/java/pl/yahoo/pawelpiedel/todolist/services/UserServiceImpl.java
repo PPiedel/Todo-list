@@ -1,6 +1,7 @@
 package pl.yahoo.pawelpiedel.todolist.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.yahoo.pawelpiedel.todolist.dto.UserDto;
 import pl.yahoo.pawelpiedel.todolist.model.Role;
@@ -12,6 +13,9 @@ import java.util.Collections;
 @Service("userService")
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -33,7 +37,7 @@ public class UserServiceImpl implements UserService {
         } else {
             user = new User();
             user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
+            user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
             user.setRoles(Collections.singletonList(new Role("ROLE_USER")));
         }
 
